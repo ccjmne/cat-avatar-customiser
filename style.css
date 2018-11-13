@@ -19,10 +19,8 @@ body {
 
 .avatar {
   position: relative;
-  width: 256px;
-  height: 256px;
-  border: 5px solid var(--accent-1);
-  border-radius: 5px;
+  border: 10px solid var(--accent-1);
+  border-radius: 20%;
   background-color: white;
 }
 
@@ -35,6 +33,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
 }
 
 .button {
