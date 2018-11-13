@@ -1,13 +1,13 @@
-Cat-Avatar-Generator
+Cat-Avatar-Customiser
 ====================
 
 ![cover picture](http://www.peppercarrot.com/data/images/lab/2016-11-30_cdn/2016-11-29_the-quest-to-free-peppercarrot-website_02a-avatar.jpg)
 
 A generator of cats pictures optimised to generate or random avatars, or defined avatar from a "seed". A derivation by [David Revoy](http://www.peppercarrot.com) from the original [MonsterID by Andreas Gohr's](https://www.splitbrain.org/blog/2007-01/20_monsterid_as_gravatar_fallback).
 
-This repository also includes a pure javascript(no jquery,ES6) version, for you folks who don't have access to a PHP enabled server.
+If you just wish your cat was a little different, it's now possible with this Cat Avatar Customiser!
 
-[**Demo**](https://barrabinfc.github.io/cat-avatar-generator/)
+[**Demo**](https://ccjmne.github.io/cat-avatar-customiser/)
 
 ## License:
 
