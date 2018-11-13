@@ -9,49 +9,37 @@ function create({ type = 'div', id = '', classes = [], contents = '', children =
   return e;
 }
 
-const layers = document.querySelector('.avatar');
-const form = document.querySelector('.form');
+const layers = document.body.appendChild(create({ classes: ['avatar'] }));
+const form   = document.body.appendChild(create({}));
 
-[
+([
   { opts: 15, display: 'Body type', type: 'body' },
   { opts: 10, display: 'Fur', type: 'fur' },
   { opts: 15, display: 'Eyes', type: 'eyes' },
   { opts: 10, display: 'Mouth', type: 'mouth' },
   { opts: 17, display: 'Accessory', type: 'accessorie' }
-].forEach(({ display, opts, type }) => {
+]).map(type => Object.assign(type, { layer: layers.appendChild(create({ type: 'img', classes: ['layer'] })) }))
+  .forEach(({ display, opts, type, layer }) => {
+    const value = create({ type: 'span', classes: ['value'] });
+    const prev  = create({ classes: ['button', 'prev'], contents: `<span class="rotate180">➼</span>` });
+    const next  = create({ classes: ['button', 'next'], contents: `➼` });
+    const entry = form.appendChild(create({
+      classes: ['entry'],
+      children: [
+        prev,
+        create({ children: [create({ type: 'span', contents: `${ display }: ` }), value] }),
+        next
+      ]
+    }));
 
-  const layer = create({ type: 'img', classes: ['layer'] });
-  layers.append(layer);
+    let current = 1;
+    const updateValue = v => {
+      layer.setAttribute('src', `./avatars/${ type }_${ v }.png`);
+      value.innerHTML = v;
+      current = v;
+    };
 
-  let current = 1;
-
-  const value = create({ type: 'span', classes: ['value'] });
-  const prev = create({ classes: ['button', 'prev'], contents: `<span class="rotate180">➼</span>` });
-  const next = create({ classes: ['button', 'next'], contents: `➼` });
-  const entry = create({
-    classes: ['entry'],
-    children: [
-      prev,
-      create({
-        children: [
-          create({ type: 'span', contents: `${ display }: ` }),
-          value
-        ]
-      }),
-      next
-    ]
+    prev.addEventListener('click', () => updateValue(current - 1 || opts));
+    next.addEventListener('click', () => updateValue((current + opts) % opts + 1));
+    updateValue(current);
   });
-
-  form.appendChild(entry);
-
-  const updateValue = v => {
-    layer.setAttribute('src', `./avatars/${ type }_${ v }.png`);
-    value.innerHTML = v;
-    current = v;
-  };
-
-  prev.addEventListener('click', () => updateValue(current - 1 || opts));
-  next.addEventListener('click', () => updateValue((current + opts) % opts + 1));
-
-  updateValue(1);
-});
